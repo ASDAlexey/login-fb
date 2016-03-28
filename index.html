@@ -9,7 +9,7 @@
 <div id="response"></div>
 <script>
     function getUserData() {
-        FB.api('/me', function (response) {
+        FB.api('/me', {locale: 'en_US', fields: 'name, email'}, function (response) {
             console.log(response);
             document.getElementById('response').innerHTML = 'Hello ' + response.name;
         });
@@ -49,11 +49,12 @@
         //do the login
         FB.login(function (response) {
             if (response.authResponse) {
+                console.log(response);
                 //user just authorized your app
                 document.getElementById('loginBtn').style.display = 'none';
                 getUserData();
             }
-        }, {scope: 'email,public_profile', return_scopes: true});
+        }, {scope: 'email'});
     }, false);
 </script>
 </body>
